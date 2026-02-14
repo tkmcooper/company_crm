@@ -1,37 +1,43 @@
-<%= form_with(model: company) do |form| %>
-  <% if company.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <%= form_with(model: company) do |form| %>
+        <% if company.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-        <% company.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% company.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="mb-3">
+          <%= form.label :name, class: "form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :industry_id, class: "form-label" %>
+          <%= form.select :industry_id, Industry.pluck(:name, :id), {}, class: "form-select" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :description, class: "form-label" %>
+          <%= form.textarea :description, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :last_contacted_at, class: "form-label" %>
+          <%= form.datetime_field :last_contacted_at, class: "form-control" %>
+        </div>
+
+        <div>
+          <%= form.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
   </div>
-
-  <div>
-    <%= form.label :industry_id, style: "display: block" %>
-    <%= form.select :industry_id, Industry.pluck(:name, :id) %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
-  </div>
-
-  <div>
-    <%= form.label :last_contacted_at, style: "display: block" %>
-    <%= form.datetime_field :last_contacted_at %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

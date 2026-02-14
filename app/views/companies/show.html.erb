@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @company %>
-
-<div>
-  <%= link_to "Edit this company", edit_company_path(@company) %> |
-  <%= link_to "Back to companies", companies_path %>
-
-  <%= button_to "Destroy this company", @company, method: :delete %>
-</div>
+<section id="<%= dom_id @company %>" class="card my-4">
+  <h1 class="card-header"><%= @company.name %></h1>
+  <div class="card-body">
+    <p class="card-text"><%= @company.description %></p>
+    <p class="card-text">
+      <strong>Industry:</strong>
+      <%= @company.industry.name %>
+    </p>
+    <% if @company.last_contacted_at.blank? %>
+      <p class="card-text">You haven't contacted <em><%= @company.name %></em> yet.</p>
+    <% else %>
+      <p class="card-text">
+        <strong>Last contacted at:</strong>
+        <%= @company.last_contacted_at %>
+      </p>
+    <% end %>
+  </div>
+  <div class="card-footer d-flex gap-2">
+    <%= link_to "Edit", edit_company_path(@company), class: "btn btn-outline-warning" %>
+    <%= button_to "Delete", company_path(@company), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-outline-danger" %>
+    <%= link_to "Back", companies_path, class: "btn btn-outline-secondary" %>
+  </div>
+</section>

@@ -2,15 +2,20 @@
 
 <% content_for :title, "Companies" %>
 
-<h1>Companies</h1>
-
-<div id="companies">
-  <% @companies.each do |company| %>
-    <%= render company %>
-    <p>
-      <%= link_to "Show this company", company %>
-    </p>
-  <% end %>
+<div class="container">
+  <h1>Companies</h1>
+  <table id="companies" class="table table-hover">
+    <thead>
+      <th>Name</th>
+      <th>Industry</th>
+      <th>Last contacted at</th>
+      <th> </th>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+        <%= render company %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "New company", new_company_path, class: 'btn btn-outline-primary' %>
 </div>
-
-<%= link_to "New company", new_company_path %>

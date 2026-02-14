@@ -1,12 +1,10 @@
 <% content_for :title, "Editing company" %>
 
-<h1>Editing company</h1>
 
-<%= render "form", company: @company %>
-
-<br>
-
-<div>
-  <%= link_to "Show this company", @company %> |
-  <%= link_to "Back to companies", companies_path %>
+<div class="card my-4">
+  <h1 class="card-header">Editing <%= @company.name %></h1>
+  <%= render "form", company: @company %>
+  
 </div>
+<%= link_to "Back to companies", companies_path, class: 'btn btn-outline-secondary' %>
+<%= link_to "Cancel", @company, class: 'btn btn-outline-danger' %>
